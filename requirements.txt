@@ -1,0 +1,27 @@
+# Core AI
+ultralytics==8.4.182
+torch==2.14.1+cpu
+torchvision==0.29.1+cpu
+opencv-python-headless==5.0.0.93
+numpy==2.5.2
+pillow==12.3.0
+
+# Backend
+fastapi==0.144.0
+uvicorn==0.54.0
+sqlalchemy==2.1.5
+pymysql==1.2.3
+python-jose==3.5.0
+bcrypt==5.0.0
+cryptography==50.0.2
+python-multipart==0.0.32
+fpdf2==2.8.9
+
+# Data prep / analysis
+pandas==3.0.6
+matplotlib==3.11.2
+pyyaml==6.0.3
+tqdm==4.70.1
+requests==2.34.2
+
+# Frontend deps are in frontend/package.json (React 18, Vite 5, axios, recharts, react-hot-toast)

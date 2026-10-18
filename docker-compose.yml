@@ -1,0 +1,33 @@
+version: "3.8"
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: fyp_mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: fyp_contraband
+      MYSQL_USER: fyp_user
+      MYSQL_PASSWORD: fyppass123
+    ports:
+      - "3306:3306"
+    volumes:
+      - fyp_mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Optional: phpMyAdmin for DB inspection (proposal mentions Workbench/phpMyAdmin)
+  phpmyadmin:
+    image: phpmyadmin:5.2
+    container_name: fyp_phpmyadmin
+    environment:
+      PMA_HOST: mysql
+    ports:
+      - "8081:80"
+    depends_on:
+      - mysql
+
+volumes:
+  fyp_mysql_data:

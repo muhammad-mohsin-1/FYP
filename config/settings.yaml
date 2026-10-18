@@ -1,0 +1,29 @@
+# Central application configuration.
+# Environment variables override any value here (prefix FYP_, e.g. FYP_DATABASE_URL).
+app:
+  name: "Contraband Detection API"
+  host: "0.0.0.0"
+  port: 8000
+
+model:
+  path: "ai/runs/best.pt"          # trained YOLOv11 weights
+  default_confidence: 0.50
+  frame_skip_default: 3            # process every Nth frame
+
+storage:
+  database_url: "sqlite:///./fyp.db"   # production: mysql+pymysql://user:pass@host:3306/fyp
+  upload_dir: "backend/uploads"
+  evidence_dir: "evidence"
+  report_dir: "reports"
+
+auth:
+  jwt_secret: "change-me-in-production"  # or set FYP_JWT_SECRET
+  jwt_expire_minutes: 480
+
+seed:
+  admin_username: "admin"
+  admin_password: "admin123"             # change immediately after first login
+  zones:
+    - { name: "Server Room", description: "Restricted server area" }
+    - { name: "Petrol Pump", description: "Fuel station forecourt" }
+    - { name: "Examination Hall", description: "Exam venue" }

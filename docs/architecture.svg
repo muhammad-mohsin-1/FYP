@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="640" font-family="Segoe UI, Arial, sans-serif">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 z" fill="#475569"/>
+    </marker>
+    <style>
+      .box { fill: #1e293b; stroke: #38bdf8; stroke-width: 2; rx: 10; }
+      .db { fill: #14532d; stroke: #4ade80; stroke-width: 2; }
+      .title { fill: #f8fafc; font-size: 15px; font-weight: 700; }
+      .sub { fill: #94a3b8; font-size: 12px; }
+      .lbl { fill: #cbd5e1; font-size: 12px; }
+      .h1 { fill: #f8fafc; font-size: 22px; font-weight: 800; }
+    </style>
+  </defs>
+  <rect width="1100" height="640" fill="#0f172a"/>
+  <text x="550" y="38" text-anchor="middle" class="h1">Restricted Zone Contraband Detection — System Architecture</text>
+
+  <!-- Frontend -->
+  <rect x="40" y="80" width="300" height="180" class="box" rx="10"/>
+  <text x="190" y="108" text-anchor="middle" class="title">React.js Frontend</text>
+  <text x="190" y="130" text-anchor="middle" class="sub">Role-based UI (Admin / Security Officer)</text>
+  <text x="60" y="156" class="lbl">• Login + JWT session (FR1)</text>
+  <text x="60" y="176" class="lbl">• Live Monitor: video upload, zone dropdown (FR4)</text>
+  <text x="60" y="196" class="lbl">• Confidence slider (FR3), red toast alerts (FR6)</text>
+  <text x="60" y="216" class="lbl">• Zones, Incidents, Analytics, Reports pages</text>
+  <text x="60" y="236" class="lbl">• Axios → REST, WebSocket → alerts</text>
+
+  <!-- Backend -->
+  <rect x="400" y="80" width="300" height="180" class="box" rx="10"/>
+  <text x="550" y="108" text-anchor="middle" class="title">FastAPI Backend (Python)</text>
+  <text x="550" y="130" text-anchor="middle" class="sub">Async API + detection orchestration</text>
+  <text x="420" y="156" class="lbl">• /auth, /zones, /incidents, /analytics (FR1,2,9,10)</text>
+  <text x="420" y="176" class="lbl">• /videos/upload, /detect/run (FR4, FR5)</text>
+  <text x="420" y="196" class="lbl">• bcrypt passwords, JWT, RBAC guards</text>
+  <text x="420" y="216" class="lbl">• /reports/pdf → fpdf2 compliance PDF (FR11)</text>
+  <text x="420" y="236" class="lbl">• /ws/alerts → instant violation push (FR6)</text>
+
+  <!-- AI -->
+  <rect x="760" y="80" width="300" height="180" class="box" rx="10"/>
+  <text x="910" y="108" text-anchor="middle" class="title">YOLOv11 AI Engine</text>
+  <text x="910" y="130" text-anchor="middle" class="sub">Custom-trained, 2 classes</text>
+  <text x="780" y="156" class="lbl">• class 0: smoking (cigarette / vape)</text>
+  <text x="780" y="176" class="lbl">• class 1: mobile_phone</text>
+  <text x="780" y="196" class="lbl">• yolo11n transfer learning (COCO)</text>
+  <text x="780" y="216" class="lbl">• frame loop: infer → threshold → log</text>
+  <text x="780" y="236" class="lbl">• evidence .jpg snapshot per incident (FR8)</text>
+
+  <!-- DB -->
+  <rect x="400" y="330" width="300" height="130" class="db" rx="10"/>
+  <text x="550" y="358" text-anchor="middle" class="title">MySQL Database</text>
+  <text x="550" y="380" text-anchor="middle" class="sub">(SQLite for local dev — same schema)</text>
+  <text x="420" y="406" class="lbl">• users (id, username, password_hash, role)</text>
+  <text x="420" y="426" class="lbl">• zones (id, name, description)</text>
+  <text x="420" y="446" class="lbl">• incidents (timestamp, violation_type, zone, conf, evidence)</text>
+
+  <!-- Storage -->
+  <rect x="760" y="330" width="300" height="130" class="box" rx="10"/>
+  <text x="910" y="358" text-anchor="middle" class="title">Local Directory Storage</text>
+  <text x="780" y="390" class="lbl">• evidence/ — violation frame snapshots (.jpg)</text>
+  <text x="780" y="412" class="lbl">• reports/ — generated compliance PDFs</text>
+  <text x="780" y="434" class="lbl">• backend/uploads/ — uploaded videos</text>
+
+  <!-- Video source -->
+  <rect x="40" y="330" width="300" height="130" class="box" rx="10"/>
+  <text x="190" y="358" text-anchor="middle" class="title">Video Sources</text>
+  <text x="60" y="390" class="lbl">• Uploaded video files (mp4/avi/mov)</text>
+  <text x="60" y="412" class="lbl">• Tagged with camera location → zone</text>
+  <text x="60" y="434" class="lbl">• (Webcam/RTSP: same loop, future work)</text>
+
+  <!-- Arrows -->
+  <line x1="340" y1="170" x2="395" y2="170" stroke="#475569" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="352" y="160" class="sub">REST</text>
+  <line x1="700" y1="170" x2="755" y2="170" stroke="#475569" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="706" y="160" class="sub">infer</text>
+  <line x1="550" y1="260" x2="550" y2="325" stroke="#475569" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="560" y="295" class="sub">SQLAlchemy</text>
+  <line x1="700" y1="360" x2="755" y2="360" stroke="#475569" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="700" y="350" class="sub">.jpg/.pdf</text>
+  <line x1="190" y1="330" x2="190" y2="265" stroke="#475569" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="200" y="300" class="sub">frames</text>
+  <line x1="400" y1="395" x2="345" y2="395" stroke="#475569" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="348" y="385" class="sub">video</text>
+
+  <!-- Data flow note -->
+  <rect x="40" y="500" width="1020" height="110" fill="#111c33" stroke="#334155" stroke-width="1" rx="10"/>
+  <text x="60" y="528" class="title">End-to-end data flow</text>
+  <text x="60" y="552" class="lbl">1. Officer uploads video + picks camera zone → 2. FastAPI saves video, runs YOLOv11 frame loop →</text>
+  <text x="60" y="572" class="lbl">3. Detection ≥ threshold → incident row in MySQL (timestamp, type, zone, confidence) + evidence .jpg →</text>
+  <text x="60" y="592" class="lbl">4. WebSocket pushes RED toast to React dashboard instantly → 5. Analytics aggregates DB → charts; one-click PDF report.</text>
+</svg>
